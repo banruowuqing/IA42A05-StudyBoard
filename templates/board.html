@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放課後 Study Board</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>放課後 Study Board</h1>
+        <p>みんなで質問・相談しよう！</p>
+    </header>
+
+    <main>
+
+        <p>
+            <a href="/">トップページに戻る</a>
+        </p>
+
+        <div class="card">
+
+            <h2>投稿する</h2>
+
+            <form action="/post" method="post">
+
+                <p>名前</p>
+
+                <input type="text"
+                       name="name"
+                       placeholder="名前（省略可）"
+                       maxlength="30">
+
+                <p>カテゴリー</p>
+
+                <select name="category">
+                    <option value="勉強">勉強</option>
+                    <option value="テスト">テスト</option>
+                    <option value="学校生活">学校生活</option>
+                    <option value="相談">相談</option>
+                </select>
+
+                <p>メッセージ</p>
+
+                <textarea name="message"
+                          placeholder="メッセージを入力してください"
+                          maxlength="500"
+                          required></textarea>
+
+                <button type="submit">
+                    投稿する
+                </button>
+
+            </form>
+
+            <p>※ 個人情報を書かないでください。</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>投稿一覧（{{ messages|length }}件）</h2>
+
+            {% for m in messages %}
+
+            <div class="message">
+
+                <span class="category">
+                    {{ m.category }}
+                </span>
+
+                <span class="name">
+                    {{ m.name }}
+                </span>
+
+                <span class="time">
+                    {{ m.posted_at }}
+                </span>
+
+                <p>{{ m.text }}</p>
+
+            </div>
+
+            {% else %}
+
+            <p>まだ投稿がありません</p>
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+    <footer>
+        放課後 Study Board
+    </footer>
+
+</body>
+</html>
